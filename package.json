@@ -11,7 +11,9 @@
 		"url": "git+https://github.com/tacheometry/rbxts-gameanalytics.git"
 	},
 	"keywords": [
-		"roblox-ts"
+		"roblox-ts",
+		"roblox",
+		"analytics"
 	],
 	"author": "tacheometry",
 	"license": "MIT",
