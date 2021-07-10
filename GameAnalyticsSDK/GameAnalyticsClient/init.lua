@@ -15,7 +15,7 @@ ScriptContext.Error:Connect(function(message, stackTrace, scriptInst)
 
 	local scriptName = nil
 	local ok, _ = pcall(function()
-		scriptName = scriptInst:GetFullName()  -- Can't get name of some scripts because of security permission
+		scriptName = scriptInst:GetFullName() -- Can't get name of some scripts because of security permission
 	end)
 	if not ok then
 		return
@@ -26,7 +26,6 @@ end)
 
 --Functions
 local function getPlatform()
-
 	if GS:IsTenFootInterface() then
 		return "Console"
 	elseif UIS.TouchEnabled and not UIS.MouseEnabled then
@@ -38,3 +37,5 @@ end
 
 --Filtering
 Postie.SetCallback("getPlatform", getPlatform)
+
+return 0 -- Return exactly one value so require() doesn't error

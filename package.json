@@ -1,0 +1,35 @@
+{
+	"name": "@rbxts/gameanalytics",
+	"version": "2.1.29-ts1",
+	"description": "The GameAnalytics SDK for roblox-ts",
+	"main": "init.lua",
+	"scripts": {
+		"prepublishOnly": "rbxtsc --type=package --rojo=\"\""
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/tacheometry/rbxts-gameanalytics.git"
+	},
+	"keywords": [
+		"roblox-ts"
+	],
+	"author": "tacheometry",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/tacheometry/rbxts-gameanalytics/issues"
+	},
+	"homepage": "https://gameanalytics.com/docs/s/article/Roblox-SDK-Setup#Using-The-SDK",
+	"devDependencies": {
+		"@rbxts/compiler-types": "^1.1.1-types.5",
+		"@rbxts/types": "^1.0.503"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
+	"files": [
+		"GameAnalyticsSDK/GameAnalytics",
+		"GameAnalyticsSDK/GameAnalyticsClient",
+		"index.d.ts"
+	],
+	"types": "index.d.ts"
+}

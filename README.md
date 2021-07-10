@@ -1,229 +1,109 @@
-GA-SDK-ROBLOX
-=============
+<h1 align="center">📈 GameAnalytics SDK 📊</h1>
 
-GameAnalytics Roblox SDK.
+TS typings for the GameAnalytics Roblox SDK.
 
-Documentation can be found [here](https://gameanalytics.com/docs/item/roblox-sdk).
+-   **[GaneAnalytics SDK repository](https://github.com/GameAnalytics/GA-SDK-ROBLOX/)**
+-   **[GameAnalytics SDK documentation](https://gameanalytics.com/docs/s/article/Roblox-SDK-Setup#Using-The-SDK)**
+-   **[This package's repository](https://github.com/tacheometry/rbxts-gameanalytics)**
 
-If you have any issues or feedback regarding the SDK, please contact our friendly support team [here](https://gameanalytics.com/contact).
+<h2>Installation</h2>
 
-#### Requirements
-* [rojo](https://github.com/LPGhatguy/rojo) (optional, but needed if you want to automatically sync the source files inside the GameAnalyticsSDK folder into your Roblox project)
+[![NPM](https://nodei.co/npm/@rbxts/gameanalytics.png)](https://npmjs.org/package/@rbxts/gameanalytics)
 
-Changelog
----------
-<!--(CHANGELOG_TOP)-->
-**2.1.29**
-* moved postie script inside GameAnalytics scripts
+Run `npm i @rbxts/gameanalytics` in your project directory.
 
-**2.1.29**
-* moved postie script inside GameAnalytics scripts
+<h3>Differences between the Luau version</h3>
 
-**2.1.28**
-* fixed error message in errorhandler
+Unlike the normal Luau Roblox SDK, this package does not require moving scripts around in different DataModel locations.
 
-**2.1.27**
-* country code field always sent with events now (sent as 'null' if country code couldn't be fetched)
+<h2>Usage</h2>
 
-**2.1.26**
-* fixed undefined variable errors
+<h3>Server side</h3>
 
-**2.1.25**
-* fixed potential error in session end event code
+In a server script, run `GameAnalytics.initialize`
 
-**2.1.24**
-* added error tracking if country code fails to get retrieved
+```ts
+import { GameAnalytics } from "@rbxts/gameanalytics";
 
-**2.1.23**
-* fixed ab testing
+GameAnalytics.initialize({
+	gameKey: "<GAME KEY HERE>",
+	secretKey: "<SECRET KEY HERE>",
+	availableResourceCurrencies = ["Coins"],
+	...
+});
+```
 
-**2.1.22**
-* fixed bug with remote configs and ab testing ids not being added to events
+or `initializeServer`, which uses a predefined configuration:
 
-**2.1.21**
-* fixed GetPlayerDataFromCache function
+```ts
+import { initializeServer } from "@rbxts/gameanalytics";
 
-**2.1.20**
-* fixes to gamepass in business events
+initializeServer("<GAME KEY HERE>", "<SECRET KEY HERE>");
+```
 
-**2.1.19**
-* fixed detection of website gamepasses throttling datastores
+<details>
+<summary>Predefined configuration values</summary>
 
-**2.1.18**
-* fixed sesion start and end issues which caused problems with metrics
+```ts
+{
+	build: "0.1",
 
-**2.1.17**
-* corrected variable name inside GetPlayerDataFromCache function
+	enableInfoLog: true,
+	enableVerboseLog: true,
 
-**2.1.16**
-* player data cache now accepts both userId of string or number type
+	// debug is enabled in Studio by default
+	enableDebugLog: undefined,
 
-**2.1.15**
-* fixed not clearing session start ts because teleport flag was not cleared
+	automaticSendBusinessEvents: true,
+	reportErrors: true,
 
-**2.1.14**
-* fixed logic for error handler
+	availableCustomDimensions01: [],
+	availableCustomDimensions02: [],
+	availableCustomDimensions03: [],
+	availableResourceCurrencies: [],
+	availableResourceItemTypes: [],
+	availableGamepasses: []
+}
+```
 
-**2.1.13**
-* added player id to error events sent from error reporting
+</details>
 
-**2.1.12**
-* fixed ScriptContext.Error error reporting
+After initialization, you can now fire analytics events, such as `GameAnalytics.addDesignEvent`, `GameAnalytics.addProgressionEvent`, `GameAnalytics.addResourceEvent`. It's strongly recommended that you read the [Event Tracking guide](https://gameanalytics.com/docs/s/article/Roblox-Event-Tracking) for the usage of these functions.
 
-**2.1.11**
-* switched from using LogService to ScriptContext.Error for error reporting
+<h3>Client side</h3>
 
-**2.1.10**
-* fixed setAvailableGamepasses function
+In a client script, run `initializeClient`:
 
-**2.1.9**
-* correct install instructions and fixed GameAnalyticsServerInit script
+```ts
+import { initializeClient } from "@rbxts/gameanalytics";
 
-**2.1.8**
-* correct business event for 'Gamepass' itemType
+initializeClient();
+```
 
-**2.1.7**
-* added country code to events to get correct country of users
+<h3>Warning</h3>
 
-**2.1.6**
-* corrected install instructions
+Retrieving data from the server on the client side (A/B experiment data, Remote Configs), is not implemented in the GameAnalytics SDK. If you want to use one of these features on the client side, you will have to create RemoteEvents manually.
 
-**2.1.5**
-* Moved everything from GameAnalyticsServer to GameAnalytics module and created a template server script for calling the initialize function.
-* Added queue for functions like addDesignEvent etc. that are called before player or GA is initialized
-* renamed server init with settings script and restructured it (new usage)
+<h3>Custom User Ids</h3>
 
-**2.1.4**
-* added session_num to init request
+For custom usernames, implementing this such as in the guide (on the client side) is not recommended for security reasons.
 
-**2.1.3**
-* Replaced previous HMAC + SHA256 + Base64 implementation with HashLib. This version is around 23 - 25% faster.
-* Changed indenting from spaces to tabs (Roblox default).
-* Worked on reformatting so it followed the Roblox Lua style guide a little better..
-* Updated the luacheck files more.
+<details>
+<summary>Instead, when using GameAnalytics User Ids (such as with event tracking functions) it's simpler to pass a Player's UserId to a function to retrieve their custom username</summary>
 
-**2.1.2**
-* fixed rojo file
+```ts
+const getUsername = (player: Player) => {
+	// don't actually use DisplayNames
+	return player.DisplayName;
+};
 
-**2.1.1**
-* updated postie script
+GameAnalytics.addDesignEvent(getUsername(player), {
+	eventId: "testEvent",
+});
+```
 
-**2.1.0**
-* added website game pass purchase tracking support
+</details>
 
-**2.0.1**
-* remote configs fixes
+---
 
-**2.0.0**
-* Remote Config calls have been updated and the old calls have deprecated. Please see GA documentation for the new SDK calls and migration guide
-* A/B testing support added
-
-**1.4.2**
-* improvements for business event
-
-**1.4.1**
-* fix to playerRemoved function
-
-**1.4.0**
-* added bindable event to listen to when player is ready (has gotten its player data loaded)
-
-**1.3.9**
-* started using new bit module instead of old one
-
-**1.3.8**
-* fixes for progression events
-
-**1.3.7**
-* bug fix for platform name fallback option
-
-**1.3.6**
-* fix for command center populated events
-
-**1.3.5**
-* fixes to some types of events not being sent
-
-**1.3.4**
-* fixed bug with automatic error events
-
-**1.3.3**
-* fixed bug with error events not sending (another one)
-
-**1.3.2**
-* fixed bug with error events not sending
-
-**1.3.1**
-* fixed multi-place game bugs
-
-**1.3.0**
-* added support for multi-place game sessions
-
-**1.2.13**
-* changed Postie from being a script to a modulescript
-
-**1.2.12**
-* added Postie module to replace invokeclient call in playerjoined
-
-**1.2.11**
-* fixed playerjoined method to not wait indefinitely in some cases
-
-**1.2.10**
-* fixed playerjoined method to not wait indefinitely in some cases
-
-**1.2.9**
-* fixed load table bug
-
-**1.2.8**
-* added missing files to rbxmx
-
-**1.2.7**
-* performance to enum lookups
-
-**1.2.6**
-* added limit to how many events there can max be in the events queue
-
-**1.2.5**
-* added better error handling for thread task execution
-
-**1.2.4**
-* added toggle function for debug logging in studio mode
-* threading performance fix
-
-**1.2.3**
-* various bug fixes
-
-**1.2.2**
-* bug fixes to manual configuration and initialization of sdk
-
-**1.2.1**
-* updated server scripts to just be descendants of ServerScriptService and not just direct child of ServerScriptService
-
-**1.2.0**
-* added enable/disable event submission function
-
-**1.1.0**
-* moved settings related code in GameAnalyticsServer script into a new script called GameAnalyticsServerInitUsingSettings to allow manual initialization from own script (OPS look at new INSTALL instructions for new script)
-
-**1.0.5**
-* renamed GameAnalyticsScript to GameAnalyticsServer
-* removed script location restriction on GameAnalyticsClient
-
-**1.0.4**
-* small corrections
-
-**1.0.3**
-* fixed automatic sending of error events
-* added script for generating rbxmx file
-
-**1.0.2**
-* fixed sha256 performance issues
-* added processReceiptCallback function to use within your own processReceipt method
-* replaced all string.len and table.getn with # operator instead
-* using game:GetService() to access services instead of using game.[some_service]
-* fixed device recognition method
-* fixed automatic sending of error events
-
-**1.0.1**
-* small bugs fixes
-
-**1.0.0**
-* initial release
+If you would like to contribute to the GameAnalytics Roblox SDK, please file Pull Requests and Issues in [its GitHub repository](https://github.com/GameAnalytics/GA-SDK-ROBLOX/), and not in the repository of this package. The types here will reflect the most recent release of the Luau code.
