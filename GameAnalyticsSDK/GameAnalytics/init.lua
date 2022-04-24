@@ -20,7 +20,6 @@ local MKT = game:GetService("MarketplaceService")
 local RunService = game:GetService("RunService")
 local LocalizationService = game:GetService("LocalizationService")
 local ScriptContext = game:GetService("ScriptContext")
-local Postie = require(script.Postie)
 local OnPlayerReadyEvent
 local ProductCache = {}
 local ONE_HOUR_IN_SECONDS = 3600
@@ -38,6 +37,10 @@ do
 	RemoteEvents.Name = "GameAnalyticsEvents"
 	RemoteEvents.Parent = game:GetService("ReplicatedStorage")
 end
+
+-- must be required after
+local Postie = require(script.Postie)
+
 
 local function addToInitializationQueue(func, ...)
 	if InitializationQueue ~= nil then
