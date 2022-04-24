@@ -60,7 +60,7 @@ local function populateConfigurations(player)
 	logger:i("Remote configs populated")
 
 	PlayerData.RemoteConfigsIsReady = true
-	GameAnalyticsRemoteConfigs = GameAnalyticsRemoteConfigs or game:GetService("ReplicatedStorage"):WaitForChild("GameAnalyticsRemoteConfigs")
+	GameAnalyticsRemoteConfigs = GameAnalyticsRemoteConfigs or game:GetService("ReplicatedStorage"):WaitForChild("GameAnalyticsEvents"):WaitForChild("GameAnalyticsRemoteConfigs")
 	GameAnalyticsRemoteConfigs:FireClient(player, PlayerData.Configurations)
 end
 

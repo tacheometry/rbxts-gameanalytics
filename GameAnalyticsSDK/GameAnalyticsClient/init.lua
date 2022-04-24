@@ -4,9 +4,9 @@
 --Services
 local GS = game:GetService("GuiService")
 local UIS = game:GetService("UserInputService")
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Postie = require(script.Postie)
 local ScriptContext = game:GetService("ScriptContext")
+local RemoteEvents = game:GetService("ReplicatedStorage"):WaitForChild("GameAnalyticsEvents")
 
 ScriptContext.Error:Connect(function(message, stackTrace, scriptInst)
 	if not scriptInst then
@@ -21,7 +21,7 @@ ScriptContext.Error:Connect(function(message, stackTrace, scriptInst)
 		return
 	end
 
-	ReplicatedStorage.GameAnalyticsError:FireServer(message, stackTrace, scriptName)
+	RemoteEvents.GameAnalyticsError:FireServer(message, stackTrace, scriptName)
 end)
 
 --Functions

@@ -18,7 +18,6 @@ local utilities = require(script.Utilities)
 local Players = game:GetService("Players")
 local MKT = game:GetService("MarketplaceService")
 local RunService = game:GetService("RunService")
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local LocalizationService = game:GetService("LocalizationService")
 local ScriptContext = game:GetService("ScriptContext")
 local Postie = require(script.Postie)
@@ -32,6 +31,13 @@ local errorCountCacheKeys = {}
 
 local InitializationQueue = {}
 local InitializationQueueByUserId = {}
+
+local RemoteEvents
+do
+	RemoteEvents = Instance.new("Folder")
+	RemoteEvents.Name = "GameAnalyticsEvents"
+	RemoteEvents.Parent = game:GetService("ReplicatedStorage")
+end
 
 local function addToInitializationQueue(func, ...)
 	if InitializationQueue ~= nil then
@@ -533,7 +539,7 @@ function ga:PlayerJoined(Player)
 
 	ga:startNewSession(Player, gaData)
 
-	OnPlayerReadyEvent = OnPlayerReadyEvent or ReplicatedStorage:WaitForChild("OnPlayerReadyEvent")
+	OnPlayerReadyEvent = OnPlayerReadyEvent or RemoteEvents:WaitForChild("OnPlayerReadyEvent")
 	OnPlayerReadyEvent:Fire(Player)
 
 	--Validate
@@ -774,18 +780,18 @@ function ga:initialize(options)
 end
 
 
-if not ReplicatedStorage:FindFirstChild("GameAnalyticsRemoteConfigs") then
+if not RemoteEvents:FindFirstChild("GameAnalyticsRemoteConfigs") then
 	--Create
-	local f = Instance.new("RemoteEvent")
+	local f = Instance.new("RemoteEvent", RemoteEvents)
 	f.Name = "GameAnalyticsRemoteConfigs"
-	f.Parent = ReplicatedStorage
+	f.Parent = RemoteEvents
 end
 
-if not ReplicatedStorage:FindFirstChild("OnPlayerReadyEvent") then
+if not RemoteEvents:FindFirstChild("OnPlayerReadyEvent") then
 	--Create
-	local f = Instance.new("BindableEvent")
+	local f = Instance.new("BindableEvent", RemoteEvents)
 	f.Name = "OnPlayerReadyEvent"
-	f.Parent = ReplicatedStorage
+	f.Parent = RemoteEvents
 end
 
 
@@ -895,14 +901,14 @@ end
 
 --Error Logging
 ScriptContext.Error:Connect(ErrorHandlerFromServer)
-if not ReplicatedStorage:FindFirstChild("GameAnalyticsError") then
+if not RemoteEvents:FindFirstChild("GameAnalyticsError") then
 	--Create
 	local f = Instance.new("RemoteEvent")
 	f.Name = "GameAnalyticsError"
-	f.Parent = ReplicatedStorage
+	f.Parent = RemoteEvents
 end
 
-ReplicatedStorage.GameAnalyticsError.OnServerEvent:Connect(function(player, message, trace, scriptName)
+RemoteEvents.GameAnalyticsError.OnServerEvent:Connect(function(player, message, trace, scriptName)
 	ErrorHandlerFromClient(message, trace, scriptName, player)
 end)
 

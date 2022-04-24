@@ -53,24 +53,24 @@
 
 local HttpService = game:GetService("HttpService")
 local RunService = game:GetService("RunService")
-local replicatedStorage = game:GetService("ReplicatedStorage")
+local remoteEvents = game:GetService("ReplicatedStorage"):WaitForChild("GameAnalyticsEvents")
 
-if not replicatedStorage:FindFirstChild("PostieSent") then
+if not remoteEvents:FindFirstChild("PostieSent") then
 	--Create
 	local f = Instance.new("RemoteEvent")
 	f.Name = "PostieSent"
-	f.Parent = replicatedStorage
+	f.Parent = remoteEvents
 end
 
-if not replicatedStorage:FindFirstChild("PostieReceived") then
+if not remoteEvents:FindFirstChild("PostieReceived") then
 	--Create
 	local f = Instance.new("RemoteEvent")
 	f.Name = "PostieReceived"
-	f.Parent = replicatedStorage
+	f.Parent = remoteEvents
 end
 
-local sent = replicatedStorage.PostieSent -- RemoteEvent
-local received = replicatedStorage.PostieReceived -- RemoteEvent
+local sent = remoteEvents.PostieSent -- RemoteEvent
+local received = remoteEvents.PostieReceived -- RemoteEvent
 
 local isServer = RunService:IsServer()
 local callbackById = {}

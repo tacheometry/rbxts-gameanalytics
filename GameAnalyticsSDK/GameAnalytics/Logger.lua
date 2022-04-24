@@ -26,7 +26,7 @@ function logger:i(format)
 
 	local m = "Info/GameAnalytics: " .. format
 	print(m)
---    GameAnalyticsSendMessage = GameAnalyticsSendMessage or game:GetService("ReplicatedStorage"):WaitForChild("GameAnalyticsSendMessage")
+--    GameAnalyticsSendMessage = GameAnalyticsSendMessage or game:GetService("ReplicatedStorage"):WaitForChild("GameAnalyticsEvents"):WaitForChild("GameAnalyticsSendMessage")
 --    GameAnalyticsSendMessage:FireAllClients({
 --        Text = m,
 --        Font = Enum.Font.Arial,
@@ -38,7 +38,7 @@ end
 function logger:w(format)
 	local m = "Warning/GameAnalytics: " .. format
 	warn(m)
---    GameAnalyticsSendMessage = GameAnalyticsSendMessage or game:GetService("ReplicatedStorage"):WaitForChild("GameAnalyticsSendMessage")
+--    GameAnalyticsSendMessage = GameAnalyticsSendMessage or game:GetService("ReplicatedStorage"):WaitForChild("GameAnalyticsEvents"):WaitForChild("GameAnalyticsSendMessage")
 --    GameAnalyticsSendMessage:FireAllClients({
 --        Text = m,
 --        Font = Enum.Font.Arial,
