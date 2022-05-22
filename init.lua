@@ -1,11 +1,11 @@
 local GameAnalytics
 if game:GetService("RunService"):IsServer() then
-	GameAnalytics = require(script:WaitForChild("GameAnalyticsSDK"):WaitForChild("GameAnalytics"))
+	GameAnalytics = require(script:WaitForChild("gameanalytics-sdk"):WaitForChild("GameAnalytics"))
 end
 
 return {
 	initializeClient = function()
-		require(script:WaitForChild("GameAnalyticsSDK"):WaitForChild("GameAnalyticsClient"))
+		require(script:WaitForChild("gameanalytics-sdk"):WaitForChild("GameAnalyticsClient"))
 	end,
 	initializeServer = function(gameKey, secretKey)
 		GameAnalytics:initialize({
