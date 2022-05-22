@@ -1,6 +1,6 @@
 {
 	"name": "@rbxts/gameanalytics",
-	"version": "2.1.35-ts1",
+	"version": "2.2.2-ts.1",
 	"description": "The GameAnalytics SDK for roblox-ts",
 	"main": "init.lua",
 	"scripts": {
