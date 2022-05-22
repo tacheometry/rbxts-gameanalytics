@@ -2,9 +2,9 @@
 
 TS typings for the GameAnalytics Roblox SDK.
 
--   **[GaneAnalytics SDK repository](https://github.com/GameAnalytics/GA-SDK-ROBLOX/)**
--   **[GameAnalytics SDK documentation](https://gameanalytics.com/docs/s/article/Roblox-SDK-Setup#Using-The-SDK)**
--   **[This package's repository](https://github.com/tacheometry/rbxts-gameanalytics)**
+- **[GaneAnalytics SDK repository](https://github.com/GameAnalytics/GA-SDK-ROBLOX/)**
+- **[GameAnalytics SDK documentation](https://gameanalytics.com/docs/s/article/Roblox-SDK-Setup#Using-The-SDK)**
+- **[This package's repository](https://github.com/tacheometry/rbxts-gameanalytics)**
 
 <h2>Installation</h2>
 
@@ -93,12 +93,12 @@ For custom usernames, implementing this such as in the guide (on the client side
 
 ```ts
 const getUsername = (player: Player) => {
-	// don't actually use DisplayNames
-	return player.DisplayName;
+  // don't actually use DisplayNames
+  return player.DisplayName;
 };
 
 GameAnalytics.addDesignEvent(getUsername(player), {
-	eventId: "testEvent",
+  eventId: "testEvent",
 });
 ```
 

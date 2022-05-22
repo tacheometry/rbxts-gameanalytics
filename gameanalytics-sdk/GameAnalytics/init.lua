@@ -220,7 +220,7 @@ function ga:addBusinessEvent(playerId, options)
 
 		if itemType == "Gamepass" and cartType ~= "Website" then
 			local player = Players:GetPlayerByUserId(playerId)
-			local playerData = store:GetPlayerData(player)
+			local playerData = store:GetPlayerDataFromCache(playerId)
 			if not playerData.OwnedGamepasses then
 				playerData.OwnedGamepasses = {}
 			end
@@ -491,8 +491,8 @@ function ga:PlayerJoined(Player)
 	end
 
 	local PlayerPlatform = "unknown"
-	local isSuccessful, platform = Postie.invokeClient("getPlatform", Player, 5)
-	if isSuccessful then
+	local isGetPlatformSuccessful, platform = Postie.invokeClient("getPlatform", Player, 5)
+	if isGetPlatformSuccessful then
 		PlayerPlatform = platform
 	end
 
@@ -520,8 +520,8 @@ function ga:PlayerJoined(Player)
 
 	local PlayerCustomUserId = ""
 	if state.UseCustomUserId then
-		local isSuccessful, customUserId = Postie.invokeClient("getCustomUserId", Player, 5)
-		if isSuccessful then
+		local isGetCustomUserIdSuccessful, customUserId = Postie.invokeClient("getCustomUserId", Player, 5)
+		if isGetCustomUserIdSuccessful then
 			PlayerCustomUserId = customUserId
 		end
 	end
@@ -679,6 +679,13 @@ function ga:GamepassPurchased(player, id, customGamepassInfo)
 end
 
 local requiredInitializationOptions = {"gameKey", "secretKey"}
+
+function ga:initServer(gameKey: string, secretKey: string)
+	ga:initialize({
+		gameKey = gameKey,
+		secretKey = secretKey
+	})
+end
 
 function ga:initialize(options)
 	threading:performTaskOnGAThread(function()
