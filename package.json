@@ -31,7 +31,8 @@
 	"files": [
 		"gameanalytics-sdk/GameAnalytics",
 		"gameanalytics-sdk/GameAnalyticsClient.lua",
-		"gameanalytics-sdk/init.lua"
+		"gameanalytics-sdk/init.lua",
+		"index.d.ts"
 	],
 	"types": "index.d.ts"
 }
