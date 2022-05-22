@@ -29,9 +29,9 @@
 		"access": "public"
 	},
 	"files": [
-		"GameAnalyticsSDK/GameAnalytics",
-		"GameAnalyticsSDK/GameAnalyticsClient",
-		"index.d.ts"
+		"gameanalytics-sdk/GameAnalytics",
+		"gameanalytics-sdk/GameAnalyticsClient.lua",
+		"gameanalytics-sdk/init.lua"
 	],
 	"types": "index.d.ts"
 }
