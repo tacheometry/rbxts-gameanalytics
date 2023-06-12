@@ -1,6 +1,6 @@
 {
 	"name": "@rbxts/gameanalytics",
-	"version": "2.2.2-ts.1",
+	"version": "2.2.3-ts.1",
 	"description": "The GameAnalytics SDK for roblox-ts",
 	"main": "init.lua",
 	"repository": "github:tacheometry/rbxts-gameanalytics",

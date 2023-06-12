@@ -323,6 +323,8 @@ addDesignEvent(Player.UserId, {
 		): D & {
 			gameanalyticsData: Map<unknown, unknown>;
 		};
+
+		isPlayerReady(playerId: PlayerId): boolean;
 	};
 
 	/**
