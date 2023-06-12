@@ -3,7 +3,7 @@
 # top-most EditorConfig file
 root = true
 
-[*.{lua,json,toml}]
+[*.{lua,json,toml,ts}]
 indent_style = tab
 indent_size = 4
 insert_final_newline = true

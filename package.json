@@ -14,7 +14,7 @@
 	"bugs": {
 		"url": "https://github.com/tacheometry/rbxts-gameanalytics/issues"
 	},
-	"homepage": "https://gameanalytics.com/docs/s/article/Roblox-SDK-Setup#Using-The-SDK",
+	"homepage": "https://docs.gameanalytics.com/integrations/sdk/roblox",
 	"devDependencies": {
 		"@rbxts/compiler-types": "^1.2.9-types.0",
 		"@rbxts/types": "^1.0.571"

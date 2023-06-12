@@ -3,7 +3,7 @@
 TS typings for the GameAnalytics Roblox SDK.
 
 - **[GaneAnalytics SDK repository](https://github.com/GameAnalytics/GA-SDK-ROBLOX/)**
-- **[GameAnalytics SDK documentation](https://gameanalytics.com/docs/s/article/Roblox-SDK-Setup#Using-The-SDK)**
+- **[GameAnalytics SDK documentation](https://docs.gameanalytics.com/integrations/sdk/roblox)**
 - **[This package's repository](https://github.com/tacheometry/rbxts-gameanalytics)**
 
 <h2>Installation</h2>
@@ -68,7 +68,7 @@ initializeServer("<GAME KEY HERE>", "<SECRET KEY HERE>");
 
 </details>
 
-After initialization, you can now fire analytics events, such as `GameAnalytics.addDesignEvent`, `GameAnalytics.addProgressionEvent`, `GameAnalytics.addResourceEvent`. It's strongly recommended that you read the [Event Tracking guide](https://gameanalytics.com/docs/s/article/Roblox-Event-Tracking) for the usage of these functions.
+After initialization, you can now fire analytics events, such as `GameAnalytics.addDesignEvent`, `GameAnalytics.addProgressionEvent`, `GameAnalytics.addResourceEvent`. It's strongly recommended that you read the [Event Tracking guide](https://docs.gameanalytics.com/integrations/sdk/roblox/event-tracking) for the usage of these functions.
 
 <h3>Client side</h3>
 

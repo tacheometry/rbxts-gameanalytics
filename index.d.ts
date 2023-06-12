@@ -16,8 +16,6 @@ type EGAErrorSeverity = {
 };
 type PlayerId = number | string;
 
-type LuaDictionary = Map<any, any> | Record<any, any>;
-
 declare namespace GameAnalyticsLibrary {
 	/**
 	 * The GameAnalytics SDK.
@@ -28,7 +26,7 @@ declare namespace GameAnalyticsLibrary {
 		EGAProgressionStatus: EGAProgressionStatus;
 		EGAErrorSeverity: EGAErrorSeverity;
 		/**
-		 * @link https://gameanalytics.com/docs/s/article/Roblox-SDK-Setup#Using-The-SDK
+		 * @link https://docs.gameanalytics.com/integrations/sdk/roblox
 		 */
 		initialize(options: {
 			gameKey: string;
@@ -60,7 +58,7 @@ declare namespace GameAnalyticsLibrary {
 		 * @param itemType The type/category of the item.
 		 * @param itemId The specific item bought.
 		 * @param cartType The game location of the purchase. Max 10 unique values.
-		 * @link https://gameanalytics.com/docs/s/article/Roblox-Event-Tracking
+		 * @link https://docs.gameanalytics.com/integrations/sdk/roblox/event-tracking#business
 		 * @example
 addBusinessEvent(100, {
 	amount: 100,
@@ -82,7 +80,7 @@ addBusinessEvent(100, {
 		/**
 		 * Resource events are used to register the flow of your in-game economy (virtual currencies) – the sink (subtraction) and the source (addition) of each virtual currency.
 		 * > Before calling the resource event it is needed to specify what discrete values can be used for currencies and item types in the Configuration phase.
-		 * @link https://gameanalytics.com/docs/s/article/Roblox-Event-Tracking
+		 * @link https://docs.gameanalytics.com/integrations/sdk/roblox/event-tracking#resource-events
 		 * @example
 // source (add) Gem currency from an in-app purchase.
 addResourceEvent(Player.UserId, {
@@ -136,13 +134,13 @@ addResourceEvent(Player.UserId, {
 
 		/**
 		 * Progression events are used to track attempts at completing some part of a game (level, area). A defined area follows a 3 tier hierarchy structure (could be world:stage:level) to indicate what part of the game the player is trying to complete.
-		 * 
+		 *
 		 * When a player is starting a progression attempt a start event should be added.
-		 * 
+		 *
 		 * When the player then finishes the attempt a fail or complete event should be added along with a score if needed.
-		 * 
+		 *
 		 * It is not required to use all 3 progression parameters.
-		 * @link https://gameanalytics.com/docs/s/article/Roblox-Event-Tracking
+		 * @link https://docs.gameanalytics.com/integrations/sdk/roblox/event-tracking#progression
 		 * @example
 // Add a progression start event.
 addProgressionEvent(Player.UserId, {
@@ -176,7 +174,7 @@ addProgressionEvent(Player.UserId, {
 		 * During the game it is possible to set the active value for each custom dimension dynamically. Once a dimension is set it will be **persisted** across sessions/game-start and automatically be added to all event categories. Remember you have to set the custom dimensions before initializing the SDK (but after setting the available custom dimensions) to be able to add the dimensions to the first session start event.
 		 *
 		 * To reset a set custom dimension simply just set it to empty string.
-		 * @link https://gameanalytics.com/docs/s/article/Roblox-SDK-GameOps#Custom-Dimensions
+		 * @link https://docs.gameanalytics.com/integrations/sdk/roblox#specifying-allowed-values
 		 */
 		configureAvailableCustomDimension01(
 			playerId: PlayerId,
@@ -205,7 +203,7 @@ addProgressionEvent(Player.UserId, {
 
 		/**
 		 * Error events are used to track custom errors in the game code. You can group the events by severity level and attach a message.
-		 * @link https://gameanalytics.com/docs/s/article/Roblox-Event-Tracking
+		 * @link https://docs.gameanalytics.com/integrations/sdk/roblox/event-tracking#error
 		 * @example
 addErrorEvent(Player.UserId, {
     severity: GameAnalytics.EGAErrorSeverity.critical,
@@ -230,21 +228,21 @@ addErrorEvent(Player.UserId, {
 		/**
 		 * Every game is special. Therefore some needed events might not be covered by our other event types. The **design event** is available for you to add your own event-id hierarchy.
 		 * > Please note that custom dimensions and progression filters will not be added on design and error events. Therefore you cannot (at the moment) filter by these when viewing design or error metrics.
-		 * 
+		 *
 		 * **It is important to not generate an excessive amount of unique nodes possible in the event hierarchy tree.**
-		 * 
+		 *
 		 * A bad implementation example:
-		 * 
+		 *
 		 * `[level_name]:[weapon_used]:[damage_done]`
-		 * 
+		 *
 		 * `level_name` could be 100 values, `weapon_used` could be 300 values and `damage_done` could be 1-5000 perhaps. This will generate an event hierarchy with:
-		 * 
+		 *
 		 * **100 * 300 * 5000 = 1.5M possible nodes.**
-		 * 
+		 *
 		 * This is far too many. Also the damage should be put as a value and not in the event string. The processing will perhaps be blocked for a game doing this and cause other problems when browsing our tool.
-		 * 
+		 *
 		 * The maximum amount of unique nodes generated should be around 10k.
-		 * @link https://gameanalytics.com/docs/s/article/Roblox-Event-Tracking
+		 * @link https://docs.gameanalytics.com/integrations/sdk/roblox/event-tracking#design
 		 * @example
 addDesignEvent(Player.UserId, {
     eventId: "Kill:Sword:Robot"
@@ -273,13 +271,14 @@ addDesignEvent(Player.UserId, {
 
 		/**
 		 * Call this function to manually check if Remote Configs is ready (has been populated with values).
+		 * @link https://docs.gameanalytics.com/integrations/sdk/roblox/game-ops#remote-configs
 		 */
 		isRemoteConfigsReady(playerId: PlayerId): boolean;
 
 		/**
 		 * If the specified key is not found in the Remote Configs it will return the default value either “normal” or “custom” default value.
-		 * @link https://gameanalytics.com/docs/s/article/Remote-Configs-Introduction
-		 * @link https://gameanalytics.com/docs/s/article/Roblox-SDK-GameOps#Remote-Configs
+		 * @link https://docs.gameanalytics.com/features/remote-configs
+		 * @link https://docs.gameanalytics.com/integrations/sdk/roblox/game-ops#remote-configs
 		 */
 		getRemoteConfigsValueAsString(
 			playerId: PlayerId,
