@@ -3,7 +3,7 @@
 	"version": "2.2.3-ts.1",
 	"description": "The GameAnalytics SDK for roblox-ts",
 	"main": "init.lua",
-	"repository": "github:firebolt_games/rbxts-gameanalytics",
+	"repository": "github:tacheometry/rbxts-gameanalytics",
 	"keywords": [
 		"roblox-ts",
 		"roblox",
