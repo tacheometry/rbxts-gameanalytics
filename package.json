@@ -1,9 +1,9 @@
 {
 	"name": "@rbxts/gameanalytics",
-	"version": "2.2.2-ts.1",
+	"version": "2.2.3-ts.1",
 	"description": "The GameAnalytics SDK for roblox-ts",
 	"main": "init.lua",
-	"repository": "github:tacheometry/rbxts-gameanalytics",
+	"repository": "github:Firebolt-Games/rbxts-gameanalytics",
 	"keywords": [
 		"roblox-ts",
 		"roblox",
@@ -12,7 +12,7 @@
 	"author": "tacheometry",
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/tacheometry/rbxts-gameanalytics/issues"
+		"url": "https://github.com/Firebolt-Games/rbxts-gameanalytics/issues"
 	},
 	"homepage": "https://gameanalytics.com/docs/s/article/Roblox-SDK-Setup#Using-The-SDK",
 	"devDependencies": {
