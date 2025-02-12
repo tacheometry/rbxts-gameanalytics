@@ -6,6 +6,10 @@ Documentation can be found [here](https://docs.gameanalytics.com/integrations/sd
 
 If you have any issues or feedback regarding the SDK, please contact our friendly support team [here](https://gameanalytics.com/contact).
 
+## Changelog
+
+For a detailed list of changes, see the [CHANGELOG](CHANGELOG.md).
+
 ## Requirements
 
 * [rojo](https://github.com/LPGhatguy/rojo) (optional, but needed if you want to automatically sync the source files inside the GameAnalyticsSDK folder into your Roblox project)
