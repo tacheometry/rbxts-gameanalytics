@@ -588,7 +588,7 @@ function ga:PlayerJoined(Player: Player)
 	--Variables
 	local PlayerData = store:GetPlayerData(Player)
 
-	if teleportData then
+	if teleportData and typeof(teleportData) == "table" then
 		gaData = teleportData.gameanalyticsData and teleportData.gameanalyticsData[tostring(Player.UserId)]
 	end
 
