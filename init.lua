@@ -14,6 +14,6 @@ return {
 			error("initializeServer() can only be called on the server")
 		end
 
-		return require(script:WaitForChild("gameanalytics-sdk")).initServer(gameKey, secretKey)
+		return require(script:WaitForChild("gameanalytics-sdk")):initServer(gameKey, secretKey)
 	end
 }
