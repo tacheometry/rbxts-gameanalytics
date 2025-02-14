@@ -1,35 +1,19 @@
-local GameAnalytics
-if game:GetService("RunService"):IsServer() then
-	GameAnalytics = require(script:WaitForChild("gameanalytics-sdk"):WaitForChild("GameAnalytics"))
-end
-
 return {
+	GameAnalytics = require(script:WaitForChild("gameanalytics-sdk")),
+	
 	initializeClient = function()
-		require(script:WaitForChild("gameanalytics-sdk"):WaitForChild("GameAnalyticsClient"))
+		if not game:GetService("RunService"):IsClient() then
+			error("initializeClient() can only be called on the client")
+		end
+
+		return require(script:WaitForChild("gameanalytics-sdk")).initClient()
 	end,
-	initializeServer = function(gameKey, secretKey)
-		GameAnalytics:initialize({
-			build = "0.1",
 
-			gameKey = gameKey,
-			secretKey = secretKey,
+	initializeServer = function(gameKey: string, secretKey: string)
+		if not game:GetService("RunService"):IsServer() then
+			error("initializeServer() can only be called on the server")
+		end
 
-			enableInfoLog = true,
-			enableVerboseLog = false,
-
-			--debug is by default enabled in studio only
-			enableDebugLog = nil,
-
-			automaticSendBusinessEvents = true,
-			reportErrors = true,
-
-			availableCustomDimensions01 = {},
-			availableCustomDimensions02 = {},
-			availableCustomDimensions03 = {},
-			availableResourceCurrencies = {},
-			availableResourceItemTypes = {},
-			availableGamepasses = {},
-		})
-	end,
-	GameAnalytics = GameAnalytics,
+		return require(script:WaitForChild("gameanalytics-sdk")):initServer(gameKey, secretKey)
+	end
 }

@@ -176,21 +176,21 @@ addProgressionEvent(Player.UserId, {
 		 * To reset a set custom dimension simply just set it to empty string.
 		 * @link https://docs.gameanalytics.com/integrations/sdk/roblox#specifying-allowed-values
 		 */
-		configureAvailableCustomDimension01(
+		configureAvailableCustomDimensions01(
 			playerId: PlayerId,
 			dimension: string
 		): void;
 		/**
 		 * @see configureAvailableCustomDimension01
 		 */
-		configureAvailableCustomDimension02(
+		configureAvailableCustomDimensions02(
 			playerId: PlayerId,
 			dimension: string
 		): void;
 		/**
 		 * @see configureAvailableCustomDimension01
 		 */
-		configureAvailableCustomDimension03(
+		configureAvailableCustomDimensions03(
 			playerId: PlayerId,
 			dimension: string
 		): void;
