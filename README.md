@@ -14,7 +14,7 @@ Run `npm i @rbxts/gameanalytics` in your project directory.
 
 <h3>Differences between the Luau version</h3>
 
-Unlike the normal Luau Roblox SDK, this package does not require moving scripts around in different DataModel locations.
+Unlike the upstream Luau SDK, this package exports three variables, `initializeServer`, `initializeClient`, and `GameAnalytics`.
 
 <h2>Usage</h2>
 
