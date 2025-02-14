@@ -14,6 +14,10 @@ type EGAErrorSeverity = {
 	error: "error";
 	critical: "critical";
 };
+type CustomFields = Record<string, string>;
+type EventOptions = {
+	customFields?: CustomFields;
+};
 type PlayerId = number | string;
 
 declare namespace GameAnalyticsLibrary {
@@ -69,7 +73,7 @@ addBusinessEvent(100, {
 		 */
 		addBusinessEvent(
 			playerId: PlayerId,
-			options: {
+			options: EventOptions & {
 				amount: number;
 				itemType: string;
 				itemId: string;
@@ -102,7 +106,7 @@ addResourceEvent(Player.UserId, {
 		 */
 		addResourceEvent(
 			playerId: PlayerId,
-			options: {
+			options: EventOptions & {
 				/**
 				 * A defined enum for sourcing and sinking resources.
 				 */
@@ -161,7 +165,7 @@ addProgressionEvent(Player.UserId, {
 		 */
 		addProgressionEvent(
 			playerId: PlayerId,
-			options: {
+			options: EventOptions & {
 				progressionStatus: EGAProgressionStatus[keyof EGAProgressionStatus];
 				progression01: string;
 				progression02?: string;
@@ -212,7 +216,7 @@ addErrorEvent(Player.UserId, {
 		 */
 		addErrorEvent(
 			playerId: PlayerId,
-			options: {
+			options: EventOptions & {
 				/**
 				 * The severity of the error.
 				 */
@@ -257,7 +261,7 @@ addDesignEvent(Player.UserId, {
 		 */
 		addDesignEvent(
 			playerId: PlayerId,
-			options: {
+			options: EventOptions & {
 				/**
 				 * The eventId is a hierarchy string that can consist of 1-5 segments separated by ‘:’. Each segment can have a max length of 32.
 				 */
