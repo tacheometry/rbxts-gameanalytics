@@ -104,6 +104,10 @@ GameAnalytics.addDesignEvent(getUsername(player), {
 
 </details>
 
+<h2>See also</h2>
+
+[GameAnalytics AB Service](https://github.com/UrbanIndigo/gameanalytics-ab-testing) - a roblox-ts wrapper to make GA's A/B testing more convenient
+
 ---
 
 If you would like to contribute to the GameAnalytics Roblox SDK, please file Pull Requests and Issues in [its GitHub repository](https://github.com/GameAnalytics/GA-SDK-ROBLOX/), and not in the repository of this package. The types here will reflect the most recent release of the Luau code.
